@@ -3,7 +3,17 @@ const bcrypt = require('bcrypt')
 const User = require('../models/users')
 
 const getAdmin = (req, res) =>{
-
+    jwt.verify(req.token, 'secret-key', (err, userData)=>{
+        if(err){
+            res.send('Se ha producido un error: '+err)
+        }else{
+            res.json({
+                message: 'Datos correctos, puede ingresar',
+                userData: userData
+            })
+        }
+    })
+    
 }
 
 const login = (req, res) =>{
